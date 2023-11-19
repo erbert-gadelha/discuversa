@@ -1,0 +1,31 @@
+{
+  "name": "aniforum-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erbert-gadelha/aniforum-backend.git"
+  },
+  "author": "erbert-gadelha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erbert-gadelha/aniforum-backend/issues"
+  },
+  "homepage": "https://github.com/erbert-gadelha/aniforum-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.17.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
