@@ -25,7 +25,7 @@ module.exports = {
           }
         ]*/
 
-        client.query(`SELECT * FROM tb_post ORDER BY id`, (err, pg_res) => {
+        client.query(`SELECT P.*, U.prof_img FROM  tb_post P, tb_user U WHERE P.user_id = U.login ORDER BY id DESC`, (err, pg_res) => {
           if (err) {
               res.status(203).send({message: err});
               return

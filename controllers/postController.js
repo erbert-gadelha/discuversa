@@ -30,9 +30,21 @@ module.exports = {
                         return;
                     }
 
-                    post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+                    console.log(post);
+                    
+                    client.query(`SELECT prof_img FROM tb_user WHERE login = '${post.user_id}'`, (err, pg_res) => {
+                        if (err) {
+                            res.status(203).send({message: err});
+                            console.log(err);
+                            return;
+                        }
 
-                    res.render('page_post', {post: post})
+                        post.user_img = pg_res.rows[0].prof_img;
+                        
+                        post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+                        res.render('page_post', {post: post})
+                    });
+
                 });
             }
         }

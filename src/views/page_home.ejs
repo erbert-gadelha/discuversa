@@ -1,11 +1,14 @@
 <%- include('header'); %>
 
 <div id="content">
+    <%- include('fragment_write_post'); %>
+
     <div id="posts">
         <%for(var i = 0; i < posts.length; i++) {%>
-                <%-include('post', {post: posts[i]});%>
+                <%-include('fragment_post', {post: posts[i]});%>
         <%}%>
     </div>
+    
 </div>
 
 <%- include('footer'); %>

@@ -50,6 +50,11 @@ body {
     font-size: large;
 }
 
+#topbar a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
 #search_bar {
     background-color: red;
     flex: 1;
@@ -97,7 +102,6 @@ footer  {
     padding: 16px;
     /*background-color: blueviolet;*/
     width: 100%;
-    max-width: 800px;
     margin: auto;
 }
 
@@ -108,7 +112,6 @@ footer  {
     outline: 2px solid var(--primary-color);
 
     background-color: white;
-    border-radius: 16px;
     overflow: hidden;
 }
 
@@ -183,7 +186,6 @@ footer  {
     padding: 16px;
     /*background-color: blueviolet;*/
     width: 100%;
-    max-width: 800px;
     margin: auto;
 }
 
@@ -207,7 +209,16 @@ footer  {
 }
 
 
+.maxw_800 {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
 
+.round_border {
+    border-radius: 16px;
+    outline: 2px solid var(--primary-color);
+}
 
 
 
@@ -217,14 +228,14 @@ footer  {
     background-color: white;
     width: 100%;
     /*height: 400px;*/
-    max-width: 800px;
     margin: 32px auto;
     padding: 32px 16px 64px 16px;
     display: flex;
     flex-direction: column;
-    border-radius: 16px;
     outline: 2px solid var(--primary-color);
 }
+
+
 
 .form_login input {
     width: 100%;
@@ -254,5 +265,62 @@ footer  {
 
 
 input:invalid {
-    background: linear-gradient(180deg, transparent 85%, pink 90%);
+    /*background: linear-gradient(180deg, transparent 85%, pink 90%);*/
+    background: whitesmoke);
+}
+
+
+
+
+
+#write_post {
+    padding: 16px;
+    width: 100%;
+}
+
+#write_post form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    background-color: whitesmoke;
+    margin: auto;
+}
+
+#write_post textarea {
+    width: 100%;
+    height: 100px;
+    padding: 16px;
+    border: none;
+    outline: none;
+    font-size: medium;
+    resize: none;
+    border-radius: 16px;
+    border: 2px solid var(--primary-color);
+}
+
+#write_post input {
+    /*width: 100%;*/
+    height: 40px;
+    padding: 16px;
+    border: none;
+    outline: none;
+    font-size: medium;
+    background-color: white;
+    border-radius: 16px;
+    border: 2px solid var(--primary-color);
+}
+
+#write_post button {
+    width: 100%;
+    height: 40px;
+    
+    border: none;
+    outline: none;
+    font-size: medium;
+    background-color: greenyellow;
+    border-radius: 16px;
+    cursor: pointer;
+    border: 2px solid var(--primary-color);
+
 }
