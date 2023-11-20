@@ -20,6 +20,9 @@ router.get    ('/user',      userController.login);
 router.delete ('/user',      userController.delete);
 router.put    ('/user',      userController.update);
 router.get    ('/user/:login',userController.index);
+router.get    ('/login',     homeController.login);
+router.post   ('/login',     userController.login);
+router.get    ('/register',  homeController.register);
 
 module.exports = router;
 

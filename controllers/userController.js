@@ -72,7 +72,7 @@ const validate_characters = (field, regex, res, value) => {
 }
  
 module.exports = {
-        index: function(req, res) {
+      index: function(req, res) {
             const user = req.params.login.toLowerCase();
 
             const query = `SELECT login, nick, birthday, prof_img FROM tb_user WHERE login = '${user}';`;
@@ -95,6 +95,8 @@ module.exports = {
       create: function(req, res) {
         let {login, nickname, password, birthdate, user_image } = req.body;
 
+        console.log(req.body);
+
         if(!login || !nickname || !password || !birthdate) {
             res.status(400).send({ message: `To CREATE a user, it's necessary to pass the following parameters: id, name, password and birthdate` });
             return;
@@ -116,10 +118,13 @@ module.exports = {
        
         //client.query('SELECT * FROM tb_user;', (err, pg_res) => {
         client.query(query, (err) => {
-            if (err)
+            if (err) {
                 res.status(203).send({message: err});
-            else                
-                res.status(200).send({message: "User created successfully."});
+                return;
+            }
+                    
+            //res.status(200).send({message: "User created successfully."});
+            res.redirect('/login');
         });
         
       },
@@ -264,5 +269,4 @@ module.exports = {
         });
         
       },
-      
     };

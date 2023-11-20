@@ -24,10 +24,15 @@ module.exports = {
                     }
 
                     const post = pg_res.rows[0];
-                    if(post == undefined)
-                        res.status(203).send({message: `The post with ID ${parameter} doesn't exist.`});
-                    else
-                        res.status(200).send(post);
+                    if(post == undefined) {
+                        //res.status(203).send({message: `The post with ID ${parameter} doesn't exist.`});
+                        res.redirect('/');
+                        return;
+                    }
+
+                    post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+
+                    res.render('page_post', {post: post})
                 });
             }
         }

@@ -1,0 +1,258 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --primary-color: rgb(36, 36, 36);
+    --secondary-color: rgb(255, 255, 255);
+    --light-grey: rgb(223, 223, 223);
+    --medium-grey: rgb(197, 197, 197);
+    --nav_height: 64px;
+}
+
+body {
+    background-color: var(--secondary-color);
+}
+
+.space{
+    height: var(--nav_height);
+}
+
+#topbar{
+    position: fixed;
+    z-index: 100000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    
+    padding: 16px;
+    background-color: var(--primary-color);
+
+    height: var(--nav_height);
+    width: 100%;
+
+    color: var(--secondary-color);
+}
+
+#topbar span {
+    font-size: xx-large;
+}
+
+#topbar div {
+    display: flex;
+    gap: 16px;
+    font-size: large;
+}
+
+#search_bar {
+    background-color: red;
+    flex: 1;
+    max-width: 360px;
+    height: 40px;
+    border-radius: 500px;
+    overflow: hidden;
+    margin: 0 16px;
+}
+
+#search_bar input {
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+    border: none;
+    outline: none;
+    font-size: medium;
+}
+
+footer  {
+    padding: 16px;
+    background-color: var(--primary-color);
+
+    height: var(--nav_height);
+    width: 100%;
+
+    color: var(--secondary-color);
+}
+
+#content {
+    min-height: calc(100vh - var(--nav_height) - var(--nav_height));
+}
+
+.centralize {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+#posts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    /*background-color: blueviolet;*/
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.post {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid var(--primary-color);
+
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+
+
+.post .post_header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding: 8x;
+    border-bottom: 2px solid var(--primary-color);
+
+    gap: 16px;
+}
+
+.post .post_header .title {
+    margin: auto;
+}
+
+.post .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.post .profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+.post .date {
+    font-size: small;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}
+
+.post .post_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 16px;
+    background-color: whitesmoke;
+    text-decoration: none;
+    color: black;
+}
+
+.post .post_content p {
+    flex: 1;
+
+    padding: 16px;
+}
+
+.post .post_content img {
+    width: 64px;
+    height: 64px;
+}
+
+
+#post_main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    /*background-color: blueviolet;*/
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+#post_main .post_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    outline: 2px solid var(--primary-color);
+    align-items: center;
+}
+
+#post_main .post_content img {
+    width: auto;
+    height: auto;
+
+    max-height: 360px;
+}
+
+#post_main .post_content p {
+    width: 100%;
+}
+
+
+
+
+
+
+.form_login {
+
+    
+    background-color: white;
+    width: 100%;
+    /*height: 400px;*/
+    max-width: 800px;
+    margin: 32px auto;
+    padding: 32px 16px 64px 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    outline: 2px solid var(--primary-color);
+}
+
+.form_login input {
+    width: 100%;
+    height: 40px;
+    margin: 8px 0;
+    padding: 0 16px;
+    border: none;
+    outline: none;
+    font-size: medium;
+    border-radius: 500px;
+    outline: 2px solid var(--primary-color);
+}
+
+.form_login label {
+    margin-left: 8px;
+}
+
+.form_login #submit_button {
+    background-color: greenyellow;
+    outline: 2px solid var(--primary-color);
+    cursor: pointer;
+}
+
+.form_login a {
+    width: 100%;
+}
+
+
+input:invalid {
+    background: linear-gradient(180deg, transparent 85%, pink 90%);
+}

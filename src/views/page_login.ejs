@@ -1,0 +1,18 @@
+<%- include('header'); %>
+
+<div id="content" class="centralize">
+    
+    <form class="form_login" action="/login" method="post">
+        <label for="login">login</label>
+        <input type="text" name="login" id="login" placeholder="Username" minlength="1" maxlength="15">
+        <br>
+        <label for="password">senha</label>
+        <input type="password" name="password" id="password" placeholder="Password"  minlength="4" maxlength="20">
+        <br>
+        <input id="submit_button" type="submit" value="Login">
+        <a href="/register">register</a>
+    </form>
+
+</div>
+
+<%- include('footer'); %>

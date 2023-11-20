@@ -1,10 +1,55 @@
+const { post } = require("../routes"),
+      client = require('../database/control.js').client;
+
 module.exports = {
       "index": function(req, res) {
-        const header = '<h1 style="font-size: 3rem; text-align: center;">AniFórum</h1><h2 style="font-size: 2rem; text-align: center;">Endpoints:</h2>'
-        const post = '<a href="/post" style="font-size: 2rem;">post</a>';
-        const anime = '<a href="/anime" style="font-size: 2rem;">anime</a><br>';
-        const div = `<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;"> ${post} ${anime} </div>`;
-        res.send(`${header} ${div}`);
+        
+        /*const posts = [
+          {
+            "id": 14,
+            "user_id": "pedro12",
+            "user_img": "",
+            "img_url": "https://upload.wikimedia.org/wikipedia/pt/7/72/Pok%C3%A9mon_Emerald_cover.png",
+            "title": "PokemonEmerald é bom demaizi",
+            "body": "pense num jogo topzeira",
+            "date": "2023-11-16T08:37:34.228Z"
+          },
+          {
+            "id": 15,
+            "user_id": "pedro12",
+            "user_img": "",
+            "img_url": "",
+            "title": "hantaro",
+            "body": "body generico",
+            "date": "2023-11-16T08:50:37.019Z"
+          }
+        ]*/
+
+        client.query(`SELECT * FROM tb_post ORDER BY id`, (err, pg_res) => {
+          if (err) {
+              res.status(203).send({message: err});
+              return
+          }
+
+          const posts = pg_res.rows;
+          
+          posts.map(post => {
+            post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+          });
+
+          res.render('page_home', {posts: posts});
+
+          return;
+        });
+        
+      },
+
+      "login": function(req, res) {
+        res.render('page_login');
+      },
+
+      "register": function(req, res) {
+        res.render('page_register');
       },
   
       "*": function(req, res) {
