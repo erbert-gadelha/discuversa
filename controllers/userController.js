@@ -72,201 +72,199 @@ const validate_characters = (field, regex, res, value) => {
 }
  
 module.exports = {
-      index: function(req, res) {
-            const user = req.params.login.toLowerCase();
+    index: function(req, res) {
+                const user = req.params.login.toLowerCase();
 
-            const query = `SELECT login, nick, birthday, prof_img FROM tb_user WHERE login = '${user}';`;
-            client.query(query, (err, pg_res) => {
-                if (err) {
-                    res.status(203).send({message: err});
-                    return
-                }
-
-                const user = pg_res.rows[0];
-
-                if(user == undefined || user == null) {
-                    res.status(400).send({ message: `User not found` });
-                    return;
-                }
-
-                res.status(200).send({message: user});
-        });
-      },
-      create: function(req, res) {
-        let {login, nickname, password, birthdate, user_image } = req.body;
-
-        console.log(req.body);
-
-        if(!login || !nickname || !password || !birthdate) {
-            res.status(400).send({ message: `To CREATE a user, it's necessary to pass the following parameters: id, name, password and birthdate` });
-            return;
-        }
-
-        login = login.toLowerCase();
-        nickname = nickname.trim();
-
-        if(!validate_length(   'login', 4, 15, res,    login)) return;
-        if(!validate_length('nickname', 1, 20, res, nickname)) return;
-        if(!validate_length('password', 4, 20, res, password)) return;
-        if(!validate_date  (res, birthdate))                   return;
-        if(!validate_characters(   'login',        /^[a-zA-Z0-9_-]+$/, res,    login)) return;
-        if(!validate_characters('nickname', /^[a-zA-Z0-9À-ÿ\s.\-_]+$/, res, nickname)) return;
-        
-
-        password = bcrypt.hashSync(password, Number.parseInt(process.env.SALT_ROUNDS));
-        const query = `INSERT INTO tb_user (login, nick, birthday, password, prof_img) VALUES ('${login}', '${nickname}', '${birthdate}', '${password}', '${user_image}');`;
-       
-        //client.query('SELECT * FROM tb_user;', (err, pg_res) => {
-        client.query(query, (err) => {
+        const query = `SELECT login, nick, birthday, prof_img FROM tb_user WHERE login = '${user}';`;
+        client.query(query, (err, pg_res) => {
             if (err) {
                 res.status(203).send({message: err});
+                return
+            }
+
+            const user = pg_res.rows[0];
+
+            if(user == undefined || user == null) {
+                res.status(400).send({ message: `User not found` });
                 return;
             }
-                    
-            //res.status(200).send({message: "User created successfully."});
-            res.redirect('/login');
-        });
-        
-      },
+            
+            res.status(200).send({message: user});
+          });
+    },
+    create: function(req, res) {
+    let {login, nickname, password, birthdate, user_image } = req.body;
 
-      login: function(req, res) {
-        
-        const {login, password} = req.body;
+    console.log(req.body);
 
-        if(!login || !password) {
-            res.status(400).send({ message: `To LOGIN, it's necessary to pass the following parameters: login and password` });
+    if(!login || !nickname || !password || !birthdate) {
+        res.status(400).send({ message: `To CREATE a user, it's necessary to pass the following parameters: id, name, password and birthdate` });
+        return;
+    }
+
+    login = login.toLowerCase();
+    nickname = nickname.trim();
+
+    if(!validate_length(   'login', 4, 15, res,    login)) return;
+    if(!validate_length('nickname', 1, 20, res, nickname)) return;
+    if(!validate_length('password', 4, 20, res, password)) return;
+    if(!validate_date  (res, birthdate))                   return;
+    if(!validate_characters(   'login',        /^[a-zA-Z0-9_-]+$/, res,    login)) return;
+    if(!validate_characters('nickname', /^[a-zA-Z0-9À-ÿ\s.\-_]+$/, res, nickname)) return;
+    
+
+    password = bcrypt.hashSync(password, Number.parseInt(process.env.SALT_ROUNDS));
+    const query = `INSERT INTO tb_user (login, nick, birthday, password, prof_img) VALUES ('${login}', '${nickname}', '${birthdate}', '${password}', '${user_image}');`;
+    
+    client.query(query, (err) => {
+        if (err) {
+            res.status(203).send({message: err});
             return;
         }
+                
+        res.status(200).send({message: "User created successfully."});
+    });
+    
+    },
 
-        const query = `SELECT password FROM tb_user WHERE login = '${login}';`;
-        client.query(query, (err, pg_res) => {
-                if (err) {
-                    res.status(203).send({message: err});
-                    return
-                }
+    login: function(req, res) {
+    
+    const {login, password} = req.body;
 
-                const user = pg_res.rows[0];
+    if(!login || !password) {
+        res.status(400).send({ message: `To LOGIN, it's necessary to pass the following parameters: login and password` });
+        return;
+    }
 
-                if(user == undefined || user == null) {
-                    res.status(400).send({ message: `User not found` });
-                    return;
-                }
+    const query = `SELECT password FROM tb_user WHERE login = '${login}';`;
+    client.query(query, (err, pg_res) => {
+            if (err) {
+                res.status(203).send({message: err});
+                return
+            }
 
-                user.password = bcrypt.compareSync(password, user.password);
-                res.status(200).send({message: user});
-        });
+            const user = pg_res.rows[0];
 
-
-      },
-      
-      delete: function(req, res) {
-        const {login, password} = req.body;
-
-        if(!login || !password) {
-            res.status(400).send({ message: `To DELETE, it's necessary to pass the following parameters: login and password` });
-            return;
-        }
-
-        const queries = {
-            delete: `DELETE FROM tb_user WHERE login = '${login}';`,
-            select: `SELECT * FROM tb_user WHERE login = '${login}';`
-        }
-
-        client.query(queries.select, (err, pg_res) => {
-                if (err) {
-                    res.status(203).send({message: err});
-                    return
-                }
-
-                const user = pg_res.rows[0];
-
-                if(user == undefined || user == null) {
-                    res.status(400).send({ message: `User not found` });
-                    return;
-                }
-
-                if(!bcrypt.compareSync(password, user.password)) {
-                    res.status(400).send({ message: `Invalid password` });
-                    return;
-                }
-
-                client.query(queries.delete, (err, pg_res) => {
-                    if (err) {
-                        res.status(203).send({message: err});
-                        return
-                    }
-                    res.status(200).send({message: "User deleted successfully."});
-                });
-
-        });
-        
-      },
-
-      update: function(req, res) {
-        let {login, password, field, value} = req.body;
-
-        if(!login || !password || !field || !value) {
-            res.status(400).send({ message: 'There are missing fields on BODY' });
-            return;
-        }
-
-
-        switch(field) {
-            case 'login':
-                res.status(400).send({ message: 'Login\'s are permanent.' });
+            if(user == undefined || user == null) {
+                res.status(400).send({ message: `User not found` });
                 return;
-            case 'password':
-                if(!validate_length('password', 4, 20, res, value)) return;
-                break;
-            case 'nickname':
-                if(!validate_length('nickname', 1, 20, res, value)) return;
-                if(!validate_characters('nickname', /^[a-zA-Z0-9À-ÿ\s.\-_]+$/, res, value)) return;
-                field = 'nick';
-                break;
-            case 'prof_img':
-                break;
-            case 'birthday':
-                if(!validate_date(res, value)) return;
-                break;
-            default:
-                res.status(400).send({ message: `Field '${field}' doesn't exist.` });
+            }
+
+            user.password = bcrypt.compareSync(password, user.password);
+            res.status(200).send({message: user});
+    });
+
+
+    },
+    
+    delete: function(req, res) {
+    const {login, password} = req.body;
+
+    if(!login || !password) {
+        res.status(400).send({ message: `To DELETE, it's necessary to pass the following parameters: login and password` });
+        return;
+    }
+
+    const queries = {
+        delete: `DELETE FROM tb_user WHERE login = '${login}';`,
+        select: `SELECT * FROM tb_user WHERE login = '${login}';`
+    }
+
+    client.query(queries.select, (err, pg_res) => {
+            if (err) {
+                res.status(203).send({message: err});
+                return
+            }
+
+            const user = pg_res.rows[0];
+
+            if(user == undefined || user == null) {
+                res.status(400).send({ message: `User not found` });
                 return;
-        }
+            }
 
-        const queries = {
-            update: `UPDATE tb_user SET ${field} = '${value}' WHERE login = '${login}';`,
-            select: `SELECT * FROM tb_user WHERE login = '${login}';`
-        }
+            if(!bcrypt.compareSync(password, user.password)) {
+                res.status(400).send({ message: `Invalid password` });
+                return;
+            }
 
-        console.log(queries.update);
-
-        client.query(queries.select, (err, pg_res) => {
+            client.query(queries.delete, (err, pg_res) => {
                 if (err) {
                     res.status(203).send({message: err});
                     return
                 }
+                res.status(200).send({message: "User deleted successfully."});
+            });
 
-                const user = pg_res.rows[0];
+    });
+    
+    },
 
-                if(user == undefined || user == null) {
-                    res.status(400).send({ message: `User not found` });
-                    return;
+    update: function(req, res) {
+    let {login, password, field, value} = req.body;
+
+    if(!login || !password || !field || !value) {
+        res.status(400).send({ message: 'There are missing fields on BODY' });
+        return;
+    }
+
+
+    switch(field) {
+        case 'login':
+            res.status(400).send({ message: 'Login\'s are permanent.' });
+            return;
+        case 'password':
+            if(!validate_length('password', 4, 20, res, value)) return;
+            break;
+        case 'nickname':
+            if(!validate_length('nickname', 1, 20, res, value)) return;
+            if(!validate_characters('nickname', /^[a-zA-Z0-9À-ÿ\s.\-_]+$/, res, value)) return;
+            field = 'nick';
+            break;
+        case 'prof_img':
+            break;
+        case 'birthday':
+            if(!validate_date(res, value)) return;
+            break;
+        default:
+            res.status(400).send({ message: `Field '${field}' doesn't exist.` });
+            return;
+    }
+
+    const queries = {
+        update: `UPDATE tb_user SET ${field} = '${value}' WHERE login = '${login}';`,
+        select: `SELECT * FROM tb_user WHERE login = '${login}';`
+    }
+
+    console.log(queries.update);
+
+    client.query(queries.select, (err, pg_res) => {
+            if (err) {
+                res.status(203).send({message: err});
+                return
+            }
+
+            const user = pg_res.rows[0];
+
+            if(user == undefined || user == null) {
+                res.status(400).send({ message: `User not found` });
+                return;
+            }
+
+            if(!bcrypt.compareSync(password, user.password)) {
+                res.status(400).send({ message: `Invalid password` });
+                return;
+            }
+
+            client.query(queries.update, (err, pg_res) => {
+                if (err) {
+                    res.status(203).send({message: err});
+                    return
                 }
+                res.status(200).send({message: `Field '${field}' was successfully updated.`});
+            });
 
-                if(!bcrypt.compareSync(password, user.password)) {
-                    res.status(400).send({ message: `Invalid password` });
-                    return;
-                }
-
-                client.query(queries.update, (err, pg_res) => {
-                    if (err) {
-                        res.status(203).send({message: err});
-                        return
-                    }
-                    res.status(200).send({message: `Field '${field}' was successfully updated.`});
-                });
-
-        });
-        
-      },
-    };
+    });
+    
+    },
+};

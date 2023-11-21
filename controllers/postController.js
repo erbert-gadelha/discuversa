@@ -1,8 +1,8 @@
 const client = require('../database/control.js').client;
  
 module.exports = {
-      index: function(req, res) {
-        const parameter = req.url.split('/')[2];
+      index: function(req, res) {        
+        const parameter = req.params.id;
 
         if(!parameter){
             client.query(`SELECT * FROM tb_post`, (err, pg_res) => {
@@ -25,25 +25,11 @@ module.exports = {
 
                     const post = pg_res.rows[0];
                     if(post == undefined) {
-                        //res.status(203).send({message: `The post with ID ${parameter} doesn't exist.`});
-                        res.redirect('/');
+                        res.status(203).send({message: `The post with ID ${parameter} doesn't exist.`});
                         return;
                     }
 
-                    console.log(post);
-                    
-                    client.query(`SELECT prof_img FROM tb_user WHERE login = '${post.user_id}'`, (err, pg_res) => {
-                        if (err) {
-                            res.status(203).send({message: err});
-                            console.log(err);
-                            return;
-                        }
-
-                        post.user_img = pg_res.rows[0].prof_img;
-                        
-                        post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
-                        res.render('page_post', {post: post})
-                    });
+                    res.status(200).send([post]);
 
                 });
             }

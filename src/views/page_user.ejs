@@ -1,0 +1,26 @@
+<%- include('header'); %>
+
+<div id="content" class="user_page" >
+
+    <div id="profile_card" class="round_border">
+        <%if ((user.prof_img) && (user.prof_img != "")) {%>
+            <img class="user_img" src= <%=user.prof_img%>>
+        <%}else{ %>  
+            <img class="user_img" src="/image/blank-profile-picture-973460_640.png">
+        <% } %>
+
+        <h3><%= user.nick %></h3>
+        <span><%= user.login %></span>
+        <span><%= user.birthday %></span>
+        
+    </div>
+
+    <div id="profile_posts">
+        <%for(var i = 0; i < posts.length; i++) {%>
+            <%-include('fragment_post', {post: posts[i]});%>
+        <%}%>
+    </div>
+
+</div>
+
+<%- include('footer'); %>

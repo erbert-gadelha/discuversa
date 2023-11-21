@@ -1,28 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const homeController        = require('../controllers/homeController.js'),
+const pageController        = require('../controllers/pageController.js'),
       animeInfoController   = require('../controllers/animeInfoController.js'),
       postController        = require('../controllers/postController.js'),
       userController        = require('../controllers/userController.js');
       
-router.get   ('/',           homeController.index);
-router.get   ('/post',       postController.index);
-router.post  ('/post',       postController.create);
-router.get   ('/post/:id',   postController.index);
-router.delete('/post/:id',   postController.delete);
-router.put   ('/post',       postController.update);
-router.get   ('/anime',      animeInfoController.index);
-router.get   ('/anime/id/:id',  animeInfoController.fetchAnime);
-router.get   ('/anime/order/:orderBy',  animeInfoController.order);
-router.get   ('/anime/order/:orderBy/:negative',  animeInfoController.order);
-router.post   ('/user',      userController.create);
-router.get    ('/user',      userController.login);
-router.delete ('/user',      userController.delete);
-router.put    ('/user',      userController.update);
-router.get    ('/user/:login',userController.index);
-router.get    ('/login',     homeController.login);
-router.post   ('/login',     userController.login);
-router.get    ('/register',  homeController.register);
+router.get   ('/',           pageController.index);
+router.get   ('/user/:login',pageController.user);
+router.get   ('/post/:id',   pageController.post);
+router.get   ('/anime',      pageController.animes);
+router.get   ('/anime/:id',  animeInfoController.fetchAnime);
+router.get   ('/login',      pageController.login);
+router.get   ('/register',   pageController.register);
+
+
+
+
+router.get    ('/api/post',       postController.index);
+router.get    ('/api/post/:id',   postController.index);
+router.post   ('/api/post',       postController.create);
+router.delete ('/api/post/:id',   postController.delete);
+router.put    ('/api/post',       postController.update);
+router.get    ('/api/anime/order/:orderBy',  animeInfoController.order);
+router.get    ('/api/anime/order/:orderBy/:negative',  animeInfoController.order);
+router.get   ('/api/user/:login',       userController.index);
+router.post   ('/api/user',      userController.create);
+router.delete ('/api/user',      userController.delete);
+router.put    ('/api/user',      userController.update);
+router.post   ('/api/login',     userController.login);
 
 module.exports = router;
 

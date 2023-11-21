@@ -2,33 +2,31 @@
 
 <div id="content">
 
-    <div id="post_main">
-        <div class="post">
-            <div class="post_header">
+    <div id="post_main" class="box_shadow maxw_800 round_border">
+        <div class="post_header">
+            
+            <a class="profile" href="/user/<%= post.user_id %>">            
+                <%if ((post.prof_img) && (post.prof_img != "")) {%>
+                    <img class="user_img" src= <%=post.prof_img%>>
+                <%}else{ %>  
+                    <img class="user_img" src="/image/blank-profile-picture-973460_640.png">
+                <% } %>
+                <span><%= post.user_id %></span>
+            </a>
                 
-                <a class="profile" href="/user/<%= post.user_id %>">            
-                    <%if ((post.user_img) && (post.user_img != "")) {%>
-                        <img class="user_img" src= <%=post.user_img%>>
-                    <%}else{ %>  
-                        <img class="user_img" src="/image/blank-profile-picture-973460_640.png">
-                    <% } %>
-                    <span><%= post.user_id %></span>
-                </a>
-                    
-                <h2 class="title">
-                    <%=post.title%>
-                </h2>
-                <span class="date">
-                    <%=post.date%>
-                </span>
-            </div>
-            <div class="post_content" href="/post/<%=post.id%>">
-                <%if (post.img_url != "") {%>
-                    <img src= <%=post.img_url%>>
-                <%} %> 
-                <p> <%=post.body%> </p>
+            <h2 class="title">
+                <%=post.title%>
+            </h2>
+            <span class="date">
+                <%=post.date%>
+            </span>
+        </div>
+        <div class="post_content" href="/post/<%=post.id%>">
+            <%if (post.img_url != "") {%>
+                <img src= <%=post.img_url%>>
+            <%} %> 
+            <p> <%=post.body%> </p>
 
-            </div>
         </div>
     </div>
 </div>
