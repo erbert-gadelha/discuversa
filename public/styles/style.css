@@ -3,11 +3,11 @@
 
 /*~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~*/
     * {
-    border: none;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Lexend Deca", sans-serif;
+        border: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Lexend Deca", sans-serif;
     }
     :root {
         --primary-color: rgb(36, 36, 36);
@@ -247,6 +247,7 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        object-fit: cover;
     }
     .post .profile span {
         max-width: 100%;
@@ -482,6 +483,7 @@
         width: 100%;
         margin: 32px auto;
         max-width: 1000px;
+        padding: 16px;
     }
     .user_page #profile_card {
         position: sticky;
@@ -503,12 +505,26 @@
         object-fit: cover;
         margin: 16px;
     }
+    .user_page #profile_card div {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        padding: 16px;
+        background-color: whitesmoke;
+        border-radius: 16px;
+    }
     .user_page #profile_posts{
         display: flex;
         flex-direction: column;
         gap: 16px;
         width: 100%;
-        margin: auto;
+        /*margin: auto;*/
+        justify-content: start;
+        align-items: flex-end;
+    }
+    .user_page #profile_posts .post{
+        margin: 0 !important;
     }
 /*~~~~~~~~~~~~ USER-PAGE ~~~~~~~~~~~~*/
 
@@ -538,6 +554,21 @@
         }
         #topbar #logo span {
             display: none;
+        }
+        .user_page {
+            flex-direction: column;
+            padding: 0 16px;
+        }
+        .user_page #profile_card {
+            position: relative;
+            top: 0;
+            width: 100%;
+            flex-direction: row;
+        }
+        .user_page #profile_card img {
+            width: 120px;
+            height: 120px;
+            margin: 0;
         }
     }
 /*~~~~~~~~~~~~ MEDIA-QUERY ~~~~~~~~~~~~*/

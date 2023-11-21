@@ -36,7 +36,10 @@ module.exports = {
           
           posts.map(post => {
             post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+            if(post.prof_img == null)
+              post.prof_img = '';
           });
+          console.log(posts);
 
           res.render('page_home', {posts: posts});
 
@@ -128,10 +131,8 @@ module.exports = {
                     post.prof_img = '';
                   else
                     post.prof_img = user.prof_img;
-                  //post.user_img = user.prof_img;
                 });
 
-                console.log(posts);
 
                 user.birthday = new Date(user.birthday).toLocaleDateString('pt-br', {year: 'numeric', month: 'long', day: 'numeric'});
                 res.render('page_user', {user: user, posts: posts});
