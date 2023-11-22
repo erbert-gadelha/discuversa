@@ -13,6 +13,7 @@ router.get   ('/anime/:id',  animeInfoController.fetchAnime);
 router.get   ('/login',      pageController.login);
 router.get   ('/register',   pageController.register);
 router.get   ('/search',     pageController.search);
+router.get   ('/logout',     pageController.logout);
 
 
 

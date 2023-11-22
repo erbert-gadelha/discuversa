@@ -1,13 +1,30 @@
 
-<div id="write_post">
-    <form class="round_border" action="/api/post" method="post">
-        <input type="hidden"  name="user"   value="erbert_" invisible>
-        <input type="text"    name="title" placeholder="title" required>
-        <textarea             name="body"  cols="30" rows="10" placeholder="Escreva aqui..." required></textarea>
-        <div>
-            <input type="text" name="img_url"  placeholder="image url (opcional)">
-            <input type="text" name="tags" placeholder="tags (opcional)">
-        </div>
-        <button type="submit" class="btn btn-primary">Postar</button>
-    </form>
-</div>
+<% if(!user){ %>
+    <div id="write_post"  >
+        <form class="round_border" action="/login" method="get">
+            <input type="hidden"  name="user"   value="erbert_" invisible>
+            <input type="text"    name="title" placeholder="title" required disabled>
+            <textarea             name="body"  cols="30" rows="10" placeholder="Escreva aqui..." required disabled></textarea>
+            <div>
+                <input type="text" name="img_url"  placeholder="image url (opcional)" disabled>
+                <input type="text" name="tags" placeholder="tags (opcional)" disabled>
+            </div>
+            <button type="submit" class="btn btn-primary">Logar</button>
+        </form>
+    </div>
+<% } else {%>
+    <div id="write_post">
+        <form class="round_border" action="/api/post" method="post">
+            <input type="hidden"  name="user"   value="erbert_" invisible>
+            <input type="text"    name="title" placeholder="title" required>
+            <textarea             name="body"  cols="30" rows="10" placeholder="Escreva aqui..." required></textarea>
+            <div>
+                <input type="text" name="img_url"  placeholder="image url (opcional)">
+                <input type="text" name="tags" placeholder="tags (opcional)">
+            </div>
+            <button type="submit" class="btn btn-primary">Postar</button>
+        </form>
+    </div>
+<% } %>
+
+

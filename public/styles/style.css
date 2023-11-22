@@ -58,12 +58,13 @@
     }
     #topbar div {
         display: flex;
-        gap: 16px;
+        gap: 8px;
         font-size: large;
     }
     #topbar a {
         color: var(--secondary-color);
         text-decoration: none;
+        position: relative;
     }
     #logo {
         display: flex;
@@ -82,8 +83,20 @@
         height: 100%;
         width: auto;
     }
-    #topbar a:hover {
-        opacity: 0.8;
+    #topbar a {
+        opacity: 0.9;
+    }
+    #topbar a p {
+        margin: 0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background-color: transparent;
+    }
+    #topbar a p:hover {
+        color: var(--light-green);
+        /*color: var(--primary-color);
+        background-color: var(--light-green);
+        outline: 1px gray solid;*/
     }
     #search_bar {
         flex: 1;
@@ -213,6 +226,14 @@
     .round_border {
         border-radius: 16px;
         outline: 1px solid gray;
+    }
+    input:disabled {
+        opacity: 0.7;
+        background-color: #f3f3f3 !important;
+    }
+    textarea:disabled {
+        opacity: 0.7;
+        background-color: #f3f3f3 !important;
     }
 /*~~~~~~~~~~~~ GERALISTAS ~~~~~~~~~~~~*/
 
@@ -594,6 +615,9 @@
             width: 120px;
             height: 120px;
             margin: 0;
+        }
+        #content {
+            padding: 16px 5%;
         }
     }
 

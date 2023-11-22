@@ -7,8 +7,8 @@ module.exports = {
 
         client.query(`SELECT P.*, U.prof_img FROM  tb_post P, tb_user U WHERE P.user_id = U.login ORDER BY id DESC`, (err, pg_res) => {
           if (err) {
-              res.status(203).send({message: err});
-              return
+            res.redirect('/');
+            return
           }
 
           const posts = pg_res.rows;
@@ -18,38 +18,34 @@ module.exports = {
             if(post.prof_img == null)
               post.prof_img = '';
           });
-          //console.log(posts);
-
-          res.render('page_home', {posts: posts});
-
+          
+          
+          //res.render('page_home', {posts: posts, user: req.user});
+          res.render('page_home', {posts: posts, user: null});
+          //res.render('page_home', {posts: posts, user: {login: 'erbert_'}});
           return;
         });
         
       },
 
       "login": function(req, res) {
-        res.render('page_login');
+        res.render('page_login', { user: null});
       },
 
       "register": function(req, res) {
-        res.render('page_register');
+        res.render('page_register', { user: null});
       },
       
       "post": function(req, res) {
         const parameter = req.params.id;
 
         if(!parameter){
-            client.query(`SELECT * FROM tb_post`, (err, pg_res) => {
-                if (err)
-                    res.status(203).send({message: err});
-                else
-                    res.status(200).send(pg_res.rows);
-            });
-
+          res.redirect('/');
+          return;
         } else {
 
             if(isNaN(parameter))
-                res.status(400).send({ message: `The post ID must be a number`});
+              res.redirect('/');
             else {
 
               const query = `SELECT PT.*, US.prof_img FROM tb_post PT INNER JOIN tb_user US ON US.login = PT.user_id WHERE PT.id = ${parseInt(parameter)};`;
@@ -57,8 +53,8 @@ module.exports = {
                 client.query(query, (err, pg_res) => {
 
                     if (err) {
-                        res.status(203).send({message: err});
-                        return;
+                      res.redirect('/');
+                      return;
                     }
 
                     const post = pg_res.rows[0];
@@ -67,7 +63,7 @@ module.exports = {
                         res.redirect('/');
                     else {
                       post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
-                      res.render('page_post', {post: post});
+                      res.render('page_post', {post: post, user: req.user});
                     }
 
                 });
@@ -126,7 +122,7 @@ module.exports = {
         let tags = req.query.tags;
 
         if(!tags) {
-          res.status(400).send({ message: `The search query must be a string`});
+          res.redirect('/');
           return;
         }
 
@@ -177,9 +173,14 @@ module.exports = {
       },
 
       "animes": function(req, res) {
+      },
 
+      "logout": function(req, res) {
+        //req.logout();
+        res.redirect('/');
       },
       "*": function(req, res) {
-        res.status(404).send({ message: `(${req.url}) is not a actual PATH.` });
+        res.redirect('/');
+        //res.status(404).send({ message: `(${req.url}) is not a actual PATH.` });
       }
     };

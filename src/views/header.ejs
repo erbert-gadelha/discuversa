@@ -20,8 +20,13 @@
             <input type="text" id="tags" name="tags" placeholder="pesquisar" value=""/>
         </form>
         <div>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <% if(!user){ %>
+                <a href="/login"><p>Login</p></a>
+                <a href="/register"><p>Register</p></a>
+            <% } else {%>
+                <a href="/user/<%= user.login %>"><p><%= user.login %></p></a>
+                <a href="/logout"><p>sair</p></a>
+            <% } %>
         </div>
     </nav>
 
@@ -29,3 +34,6 @@
 
     <div div="top" class="space"></div>
 
+
+
+    
