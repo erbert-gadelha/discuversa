@@ -4,27 +4,6 @@ const { post } = require("../routes/index.js"),
 
 module.exports = {
       "index": function(req, res) {
-        
-        /*const posts = [
-          {
-            "id": 14,
-            "user_id": "pedro12",
-            "user_img": "",
-            "img_url": "https://upload.wikimedia.org/wikipedia/pt/7/72/Pok%C3%A9mon_Emerald_cover.png",
-            "title": "PokemonEmerald é bom demaizi",
-            "body": "pense num jogo topzeira",
-            "date": "2023-11-16T08:37:34.228Z"
-          },
-          {
-            "id": 15,
-            "user_id": "pedro12",
-            "user_img": "",
-            "img_url": "",
-            "title": "hantaro",
-            "body": "body generico",
-            "date": "2023-11-16T08:50:37.019Z"
-          }
-        ]*/
 
         client.query(`SELECT P.*, U.prof_img FROM  tb_post P, tb_user U WHERE P.user_id = U.login ORDER BY id DESC`, (err, pg_res) => {
           if (err) {
@@ -39,7 +18,7 @@ module.exports = {
             if(post.prof_img == null)
               post.prof_img = '';
           });
-          console.log(posts);
+          //console.log(posts);
 
           res.render('page_home', {posts: posts});
 
@@ -141,6 +120,60 @@ module.exports = {
               });
 
             });
+      },
+
+      "search": function(req, res) {
+        let tags = req.query.tags;
+
+        if(!tags) {
+          res.status(400).send({ message: `The search query must be a string`});
+          return;
+        }
+
+        tags = tags.split(',')        
+        tags = tags.map(tag => {
+          return tag.toLowerCase().trim();
+        });
+
+        const query = `SELECT PT.*, US.prof_img FROM tb_tags TG, tb_post PT, tb_user US WHERE tag IN ('${tags.join("','")}') AND TG.post_id = PT.id AND US.login = PT.user_id GROUP BY PT.id, US.prof_img ORDER BY PT.id DESC;`;
+        client.query(query, (err, pg_res) => {
+          if(err) {
+            console.log(err);
+            res.render('page_search', {posts: []});
+            return
+          } else {
+            
+            const posts = pg_res.rows;
+
+            posts.map(post => {
+              post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+              if(post.prof_img == null)
+                post.prof_img = '';
+            });
+
+            res.render('page_search', {posts: posts});
+            return
+          }
+        });
+
+
+        /*client.query(`SELECT P.*, U.prof_img FROM  tb_post P, tb_user U WHERE P.user_id = U.login ORDER BY id DESC`, (err, pg_res) => {
+          if (err) {
+              res.status(203).send({message: err});
+              return
+          }
+
+          const posts = pg_res.rows;
+          
+          posts.map(post => {
+            post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
+            if(post.prof_img == null)
+              post.prof_img = '';
+          });
+
+          res.render('page_search', {posts: posts});
+          return;
+        });*/
       },
 
       "animes": function(req, res) {

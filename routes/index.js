@@ -12,6 +12,7 @@ router.get   ('/anime',      pageController.animes);
 router.get   ('/anime/:id',  animeInfoController.fetchAnime);
 router.get   ('/login',      pageController.login);
 router.get   ('/register',   pageController.register);
+router.get   ('/search',     pageController.search);
 
 
 
@@ -23,7 +24,7 @@ router.delete ('/api/post/:id',   postController.delete);
 router.put    ('/api/post',       postController.update);
 router.get    ('/api/anime/order/:orderBy',  animeInfoController.order);
 router.get    ('/api/anime/order/:orderBy/:negative',  animeInfoController.order);
-router.get   ('/api/user/:login',       userController.index);
+router.get    ('/api/user/:login',       userController.index);
 router.post   ('/api/user',      userController.create);
 router.delete ('/api/user',      userController.delete);
 router.put    ('/api/user',      userController.update);

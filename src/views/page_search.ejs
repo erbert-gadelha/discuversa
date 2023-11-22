@@ -1,0 +1,19 @@
+<%- include('header'); %>
+
+<div id="content">
+
+        <%if(posts.length == 0) {%>
+            <h1 style="margin: auto;">Nenhum post encontrado</h1>
+        <%} else {%>
+            <div class="maxw_800">
+                <div id="posts">
+                    <%for(var i = 0; i < posts.length; i++) {%>
+                        <%-include('fragment_post', {post: posts[i]});%>
+                    <%}%>
+                </div>
+            </div>
+        <%}%>
+    
+</div>
+
+<%- include('footer'); %>

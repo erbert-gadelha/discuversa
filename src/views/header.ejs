@@ -16,7 +16,9 @@
             <img src="../../image/logo/wo_border.svg" alt="logo">
             <span>aniforum</span>
         </a>
-        <input id="search_bar" type="text" placeholder="pesquisar" value=""/>
+        <form id="search_bar" action="/search" method="get">
+            <input type="text" id="tags" name="tags" placeholder="pesquisar" value=""/>
+        </form>
         <div>
             <a href="/login">Login</a>
             <a href="/register">Register</a>

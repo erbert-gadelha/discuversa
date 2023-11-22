@@ -2,14 +2,15 @@
 
 require('dotenv').config()
 
-/*const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;*/
+const passport_config = require('./database/passport_config');
 
 const express = require('express'),
       router = require('./routes'),
       ejs = require('ejs');
 
 const app = express();
+
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(router);
