@@ -17,7 +17,11 @@
             <span>aniforum</span>
         </a>
         <form id="search_bar" action="/search" method="get">
-            <input type="text" id="tags" name="tags" placeholder="pesquisar" value=""/>
+            <input type="text" id="tags" name="tags" placeholder="pesquisar" value="" required/>
+            <div>
+                <button id="reset"  type="reset">&#10006;</button>
+                <button id="submit" type="submit">buscar</button>
+            </div>
         </form>
         <div>
             <% if(!user){ %>

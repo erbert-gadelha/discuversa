@@ -104,6 +104,14 @@
         max-width: 360px;
         height: 40px;
         margin: 0 16px;
+        overflow: hidden;
+        border-radius: 500px;
+    }
+    #search_bar:has(input:focus) {
+        border-radius: 8px;
+    }
+    #search_bar:has(input:not(:placeholder-shown)) {
+        border-radius: 8px;
     }
     #search_bar input {
         width: 100%;
@@ -115,23 +123,34 @@
         outline: none;
 
         font-size: medium;
-        
-        border-radius: 500px;
     }
-    #search_bar  button {
-        position: absolute;
-        right: 8px;
-        top: 8px;
+    #search_bar button {
         border: none;
         outline: none;
-        background-color: transparent;
         cursor: pointer;
     }
-    #search_bar input:focus {
-        border-radius: 8px;
+    #search_bar #submit {
+        height: 100%;
+        padding: 0 16px;
+        background-color: var(--light-green);
     }
-    #search_bar input:not(:placeholder-shown) {
-        border-radius: 8px;
+    #search_bar  #reset {
+        background-color: transparent;
+    }
+    #search_bar div {
+        display: none;
+        /*display: flex;*/
+        align-items: center;
+        justify-content: center;
+
+        height: 100%;
+        width: fit-content;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    #search_bar:has(input:not(:placeholder-shown)) div {
+        display: flex;
     }
     #go_up {
         position: fixed;
