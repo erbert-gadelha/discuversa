@@ -147,7 +147,7 @@ module.exports = {
                 post.prof_img = '';
             });
 
-            res.render('page_search', {posts: posts});
+            res.render('page_search', {posts: posts, user: null});
             return
           }
         });
