@@ -39,12 +39,13 @@ module.exports = {
   
       create: function(req, res) {
         const { img_url, title, body } = req.body;
-        const user = req.user.login;
-
-        if(login == undefined) {
-            res.status(203).send({message: "Null login;"});
+        
+        if(req.user == undefined) {
+            res.status(203).send({message: "Null user;"});
             return
         }
+
+        const user = req.user.login;
 
         if(req.body == undefined) {
             res.status(203).send({message: "Null body;"});
@@ -52,7 +53,8 @@ module.exports = {
         }
 
         const query = `INSERT INTO tb_post (user_id, img_url, title, body, date) VALUES ('${user}', '${img_url}', '${title}', '${body}', '${new Date().toISOString()}') RETURNING ID;`;
-       
+        console.log(query);
+
         client.query(query, (err, pg_res) => {
 
             if (err)
