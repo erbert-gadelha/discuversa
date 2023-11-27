@@ -38,8 +38,13 @@ module.exports = {
       },
   
       create: function(req, res) {
-        console.log(req.body);
-        const { user, img_url, title, body } = req.body;
+        const { img_url, title, body } = req.body;
+        const user = req.user.login;
+
+        if(login == undefined) {
+            res.status(203).send({message: "Null login;"});
+            return
+        }
 
         if(req.body == undefined) {
             res.status(203).send({message: "Null body;"});
