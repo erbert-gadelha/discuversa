@@ -24,12 +24,14 @@
             </span>
 
             
-            <%if (post.user_id == user.login) {%>
+            <%if (user != null) {%>
+                <%if (post.user_id == user.login) {%>
 
-                <div class="post_options">
-                    <button class="material-icons" onclick="editPost()">edit</button>
-                    <button class="material-icons" onclick="deletePost()">delete</button>
-                </div>
+                    <div class="post_options">
+                        <button class="material-icons" onclick="editPost()">edit</button>
+                        <button class="material-icons" onclick="deletePost()">delete</button>
+                    </div>
+                <%} %> 
             <%} %> 
         </div>
         
