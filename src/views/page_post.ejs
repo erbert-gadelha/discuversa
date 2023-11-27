@@ -1,6 +1,8 @@
 <%- include('header'); %>
 
+
 <div id="content">
+
 
     <div id="post_main" class="box_shadow maxw_800 round_border">
         <div class="post_header">
@@ -20,7 +22,17 @@
             <span class="date">
                 <%=post.date%>
             </span>
+
+            
+            <%if (post.user_id == user.login) {%>
+
+                <div class="post_options">
+                    <button class="material-icons" onclick="editPost()">edit</button>
+                    <button class="material-icons" onclick="deletePost()">delete</button>
+                </div>
+            <%} %> 
         </div>
+        
         <div class="post_content" href="/post/<%=post.id%>">
             <%if (post.img_url != "") {%>
                 <img src= <%=post.img_url%>>
@@ -30,5 +42,28 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function editPost() {
+        window.alert("Editar Post");
+    }
+    
+    function deletePost() {
+        const confirm = window.confirm("Essa ação não pode ser desfeita. Tem certeza que deseja deletar o post?");
+        if (!confirm) return;
+
+        const Http = new XMLHttpRequest();
+        const url='/api/post/<%=post.id%>';
+
+        Http.open("DELETE", url);
+        Http.send();
+
+        Http.onreadystatechange = (e) => {
+            window.location.href = "/";
+        }
+        
+    }
+</script>
 
 <%- include('footer'); %>

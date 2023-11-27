@@ -3,16 +3,16 @@
 <div id="content" class="user_page" >
 
     <div id="profile_card" class="round_border">
-        <%if ((user.prof_img) && (user.prof_img != "")) {%>
-            <img class="user_img" src= <%=user.prof_img%>>
+        <%if ((profile.prof_img) && (profile.prof_img != "")) {%>
+            <img class="user_img" src= <%=profile.prof_img%>>
         <%}else{ %>  
             <img class="user_img" src="/image/blank-profile-picture-973460_640.png">
         <% } %>
         
         <div>
-            <h3><%= user.nick %></h3>
-            <span><%= user.login %></span>
-            <span><%= user.birthday %></span>
+            <h3><%= profile.nick %></h3>
+            <span><%= profile.login %></span>
+            <span><%= profile.birthday %></span>
         </div>
         
     </div>

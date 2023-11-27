@@ -1,7 +1,6 @@
 const client = require('../database/control.js').client,
-      bcrypt = require('bcrypt')/*,
-      jwt = require('jsonwebtoken'),
-      secret = require('../config/secret.js').secret*/;
+      bcrypt = require('bcrypt'),
+      passport_config = require('../database/passport_config');
 
 
 const validate_length = (field, min, max, res, value) => {
@@ -127,36 +126,6 @@ module.exports = {
     
     },
 
-    login: function(req, res) {
-    
-    const {login, password} = req.body;
-
-    if(!login || !password) {
-        res.status(400).send({ message: `To LOGIN, it's necessary to pass the following parameters: login and password` });
-        return;
-    }
-
-    const query = `SELECT password FROM tb_user WHERE login = '${login}';`;
-    client.query(query, (err, pg_res) => {
-            if (err) {
-                res.status(203).send({message: err});
-                return
-            }
-
-            const user = pg_res.rows[0];
-
-            if(user == undefined || user == null) {
-                res.status(400).send({ message: `User not found` });
-                return;
-            }
-
-            user.password = bcrypt.compareSync(password, user.password);
-            res.status(200).send({message: user});
-    });
-
-
-    },
-    
     delete: function(req, res) {
     const {login, password} = req.body;
 
@@ -267,4 +236,16 @@ module.exports = {
     });
     
     },
+
+    logout: function(req, res) {
+        req.logout(function(err) {
+            if (err) {
+                req.status(203).send({message: err});
+                return next(err);
+            }
+            req.session.destroy();
+            res.status(200).send({message: "User logged out successfully."});
+            return;
+        });
+    }
 };

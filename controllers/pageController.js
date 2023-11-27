@@ -2,6 +2,11 @@ const { post } = require("../routes/index.js"),
       client = require('../database/control.js').client,
       userController = require('./userController.js');
 
+require('passport');
+require('passport-local');
+require('passport-local').Strategy;
+require('passport').session
+
 module.exports = {
       "index": function(req, res) {
 
@@ -19,24 +24,34 @@ module.exports = {
               post.prof_img = '';
           });
           
+          const user = req.user||null;
+          res.render('page_home', {posts: posts, user: user});
           
-          //res.render('page_home', {posts: posts, user: req.user});
-          res.render('page_home', {posts: posts, user: null});
-          //res.render('page_home', {posts: posts, user: {login: 'erbert_'}});
           return;
         });
         
       },
 
       "login": function(req, res) {
+        if(req.user) {
+          res.redirect('/');
+          return;
+        }
+        
         res.render('page_login', { user: null});
       },
 
       "register": function(req, res) {
+        if(req.user) {
+          res.redirect('/');
+          return;
+        }
+        
         res.render('page_register', { user: null});
       },
       
       "post": function(req, res) {
+
         const parameter = req.params.id;
 
         if(!parameter){
@@ -63,7 +78,9 @@ module.exports = {
                         res.redirect('/');
                     else {
                       post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
-                      res.render('page_post', {post: post, user: req.user});
+
+                      const user = req.user||null;
+                      res.render('page_post', {post: post, user: user});
                     }
 
                 });
@@ -85,9 +102,9 @@ module.exports = {
                 return
               }
 
-              const user = pg_res.rows[0];
+              const profile = pg_res.rows[0];
 
-              if(user == undefined || user == null) {
+              if(profile == undefined || profile == null) {
                   res.redirect('/');
                   return;
               }
@@ -102,15 +119,16 @@ module.exports = {
                 posts.map(post => {
                   post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
                   
-                  if(user.prof_img == null)
+                  if(profile.prof_img == null)
                     post.prof_img = '';
                   else
-                    post.prof_img = user.prof_img;
+                    post.prof_img = profile.prof_img;
                 });
 
-
-                user.birthday = new Date(user.birthday).toLocaleDateString('pt-br', {year: 'numeric', month: 'long', day: 'numeric'});
-                res.render('page_user', {user: user, posts: posts});
+                profile.birthday = new Date(profile.birthday).toLocaleDateString('pt-br', {year: 'numeric', month: 'long', day: 'numeric'});
+                
+                const user = req.user||null;
+                res.render('page_user', {profile: profile, user: user, posts: posts});
                 return;
 
               });
@@ -147,37 +165,27 @@ module.exports = {
                 post.prof_img = '';
             });
 
-            res.render('page_search', {posts: posts, user: null});
+            const user = req.user||null;
+            res.render('page_search', {posts: posts, user: user});
             return
           }
         });
-
-
-        /*client.query(`SELECT P.*, U.prof_img FROM  tb_post P, tb_user U WHERE P.user_id = U.login ORDER BY id DESC`, (err, pg_res) => {
-          if (err) {
-              res.status(203).send({message: err});
-              return
-          }
-
-          const posts = pg_res.rows;
-          
-          posts.map(post => {
-            post.date = new Date(post.date).toLocaleDateString('pt-br', {hour: '2-digit', minute:'2-digit'});
-            if(post.prof_img == null)
-              post.prof_img = '';
-          });
-
-          res.render('page_search', {posts: posts});
-          return;
-        });*/
       },
 
       "animes": function(req, res) {
       },
 
       "logout": function(req, res) {
-        //req.logout();
-        res.redirect('/');
+        req.logout(function(err) {
+            if (err) {
+                res.redirect('/');
+                return next(err);
+            }
+            req.session.destroy();
+
+            res.redirect('/');
+            return;
+        });
       },
       "*": function(req, res) {
         res.redirect('/');

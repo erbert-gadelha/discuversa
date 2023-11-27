@@ -408,6 +408,31 @@
     #post_main .post_content p {
         width: 100%;
     }
+    #post_main .post_options {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        gap : 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        background-color: whitesmoke;
+        border-radius: 0 0 0 16px;
+    }
+    #post_main .post_options button{
+        cursor: pointer;
+        background-color: transparent;
+        color: var(--primary-color);
+    }
+    #post_main .post_options button:nth-of-type(1):hover{
+        color: orange;
+    }
+    #post_main .post_options button:nth-of-type(2):hover{
+        color: red;
+    }
 /*~~~~~~~~~~~~ POST-PAGE ~~~~~~~~~~~~*/
 
 

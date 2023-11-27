@@ -75,7 +75,7 @@ module.exports = {
       },
       
       delete: function(req, res) {
-        const post_id = req.url.split('/')[2];
+        const post_id = req.params.id;
 
         if(!post_id) {
             res.status(400).send({ message: `To DELETE a post, it's necessary to pass the desired post ID as URL parameters` });
