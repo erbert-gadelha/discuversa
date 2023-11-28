@@ -93,15 +93,15 @@ module.exports = {
         }
 
         const queries = {
-            tags: `DELETE FROM tb_tags WHERE post_id = ${post_id};`,
+            //tags: `DELETE FROM tb_tags WHERE post_id = ${post_id};`,
             post: `DELETE FROM tb_post WHERE id = ${post_id};`
         };
        
-        client.query(queries.tags, (err, pg_res) => {
+       /* client.query(queries.tags, (err, pg_res) => {
             if (err) {
                 res.status(203).send({message: err});
                 return;
-            }
+            }*/
 
             client.query(queries.post, (err, pg_res) => {
                 if (err)
@@ -110,7 +110,7 @@ module.exports = {
                     res.status(200).send({ message: `Post with ID ${post_id} deleted successfully.` });
             });
 
-        });
+        //});
 
       },
 

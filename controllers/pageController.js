@@ -187,6 +187,7 @@ module.exports = {
             return;
         });
       },
+      
       "*": function(req, res) {
         res.redirect('/');
         //res.status(404).send({ message: `(${req.url}) is not a actual PATH.` });
