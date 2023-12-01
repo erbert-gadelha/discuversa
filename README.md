@@ -30,4 +30,4 @@ AniForum é um fórum desenvolvido para o interpretador NodeJS, utilizando vári
 
 ## Acesso à Aplicação
 
-Você pode acessar a versão hospedada do AniForum em [aniforum-backend.onrender.com](https://aniforum-backend.onrender.com/).
+Você pode acessar a versão hospedada do AniForum em [discuversa.onrender.com](https://discuversa.onrender.com/).
