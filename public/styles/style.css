@@ -309,6 +309,10 @@
         opacity: 0.7;
         background-color: #f3f3f3 !important;
     }
+    .not-selectable {
+        user-select: none;
+    }
+    
 
     .icon {
         object-fit: cover;
