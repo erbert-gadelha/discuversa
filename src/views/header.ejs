@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aniforum</title>
+    <title>Discuversa</title>
     <link rel="stylesheet" href="../../styles/style.css">
-    <link rel="icon" href="image/logo/wo_border.svg">
+    <link rel="icon" href="image/logo/wt_border.svg">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
 
 
@@ -16,8 +17,8 @@
 <body>
     <nav id="topbar" class="box_shadow">
         <a id="logo" href="/">
-            <img src="../../image/logo/wo_border.svg" alt="logo">
-            <span>aniforum</span>
+            <img src="../../image/logo/wt_border.svg" alt="logo">
+            <span>discuversa</span>
         </a>
         <form id="search_bar" action="/search" method="get">
             <input type="text" id="tags" name="tags" placeholder="pesquisar" value="" required/>
@@ -28,20 +29,31 @@
                 </button>
             </div>
         </form>
-        <div>
-            <% if(!user){ %>
-                <a href="/login"><p>Login</p></a>
-                <a href="/register"><p>Register</p></a>
-            <% } else {%>
-                <a href="/user/<%= user.login %>"><p><%= user.login %></p></a>
-                <a href="/logout"><p>sair</p></a>
-            <% } %>
+        <div id="header_side_options">
+            <form>
+                <input type="checkbox" id="myCheckbox">
+                <label for="myCheckbox" id="checkmark" class="material-symbols-outlined">
+                    menu
+                </label>
+            </form>
+            
+
+            <div id="header_options">
+                <% if(!user){ %>
+                    <a href="/login"><p>Login</p></a>
+                    <a href="/register"><p>Register</p></a>
+                <% } else {%>
+                    <a href="/user/<%= user.login %>"><p><%= user.login %></p></a>
+                    <a href="/logout"><p>sair</p></a>
+                <% } %>
+            </div>
         </div>
     </nav>
 
     <a id="go_up" class="box_shadow" href="#top"> Ir para o topo! </a>
 
     <div div="top" class="space"></div>
+    <div id="content">
 
 
 

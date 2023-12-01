@@ -1,5 +1,5 @@
 {
-  "name": "aniforum-backend",
+  "name": "discuversa",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/erbert-gadelha/aniforum-backend.git"
+    "url": "git+https://github.com/erbert-gadelha/discuversa.git"
   },
   "author": "erbert-gadelha",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/erbert-gadelha/aniforum-backend/issues"
+    "url": "https://github.com/erbert-gadelha/discuversa/issues"
   },
-  "homepage": "https://github.com/erbert-gadelha/aniforum-backend#readme",
+  "homepage": "https://github.com/erbert-gadelha/discuversa#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "connect-flash": "^0.1.1",

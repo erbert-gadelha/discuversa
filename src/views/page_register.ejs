@@ -1,27 +1,23 @@
 <%- include('header'); %>
-
-<div id="content" >
     
-    <form class="form_login maxw_800 round_border" action="/api/user" method="post" >
-        <label for="login">login</label>
-        <input type="text" required name="login" id="login" placeholder="ex: viniccius13" minlength="1" maxlength="15">
-        <br>
-        <label for="nickname">nickname</label>
-        <input type="text" required name="nickname" id="nickname" placeholder="ex: Vinição" minlength="1" maxlength="20">
-        <br>
-        <label for="birthdate">data de Nascimento</label>
-        <input type="date" required name="birthdate" id="birthdate">
-        <br>
-        <label for="user_image">imagem do perfil</label>
-        <input type="text" name="user_image" id="user_image" placeholder="ex: 'facebook.com/photo/your-name"  maxlength="100">
-        <br>
-        <label for="password">senha</label>
-        <input type="password" required name="password" id="password" placeholder="Password" minlength="4" maxlength="20">
-        <br>
-        <input id="submit_button" type="submit" value="Register">
-        <a href="/login">login</a>
-    </form>
-
-</div>
+<form class="form_login maxw_800 round_border" action="/api/user" method="post" >
+    <label for="login">login</label>
+    <input type="text" required name="login" id="login" placeholder="ex: viniccius13" minlength="1" maxlength="15">
+    <br>
+    <label for="nickname">nickname</label>
+    <input type="text" required name="nickname" id="nickname" placeholder="ex: Vinição" minlength="1" maxlength="20">
+    <br>
+    <label for="birthdate">data de Nascimento</label>
+    <input type="date" required name="birthdate" id="birthdate">
+    <br>
+    <label for="user_image">imagem do perfil</label>
+    <input type="text" name="user_image" id="user_image" placeholder="ex: 'facebook.com/photo/your-name"  maxlength="100">
+    <br>
+    <label for="password">senha</label>
+    <input type="password" required name="password" id="password" placeholder="Password" minlength="4" maxlength="20">
+    <br>
+    <input id="submit_button" type="submit" value="Register">
+    <a href="/login">login</a>
+</form>
 
 <%- include('footer'); %>

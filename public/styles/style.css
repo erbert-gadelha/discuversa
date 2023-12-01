@@ -17,11 +17,23 @@
         --light-green: greenyellow;
         --nav_height: 64px;
     }
-    body {
-        /*background-color: var(--secondary-color);*/
+    html {
+        /*scroll-behavior: smooth;*/
+
         background-color: #e5e5f7;
         background-image: radial-gradient(#00000031 1.3px, #e7e7e7 1.3px);
         background-size: 26px 26px;
+    }
+    #content {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        width: 100%;
+        min-height: calc(100vh - var(--nav_height) - var(--nav_height));
+        height: fit-content;
+
+        padding: 16px 64px;
     }
 /*~~~~~~~~~~~~ MAIN ~~~~~~~~~~~~*/
 
@@ -94,9 +106,6 @@
     }
     #topbar a p:hover {
         color: var(--light-green);
-        /*color: var(--primary-color);
-        background-color: var(--light-green);
-        outline: 1px gray solid;*/
     }
     #search_bar {
         flex: 1;
@@ -174,10 +183,69 @@
     .space{
         height: var(--nav_height);
     }
+
+    #header_side_options {
+        position: relative;
+
+        height: 100%;
+        width: fit-content;
+
+        overflow: visible;
+    }
+    #header_side_options:hover {
+        color: var(--light-green);
+    }
+    #header_side_options form{
+        display: none;
+    }
+    #header_side_options form #checkmark {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: var(--primary-color);
+        font-size: 48px;
+        font-weight: bold;
+    }
 /*~~~~~~~~~~~~ HEADER ~~~~~~~~~~~~*/
 
 
 
+@media (max-width: 800px) {
+    #header_side_options {
+        position: relative;
+        /*background-color: var(--primary-color);*/
+        padding: 0;
+
+        width: 50px;
+        height: 50px;
+
+        overflow: hidden;
+        background-color: yellow !important;
+    }
+    #header_side_options form{
+        display: block;
+    }
+    #header_side_options:has(form>input:checked) {
+        overflow: visible;
+        color: var(--light-green);
+    }
+    #header_side_options #header_options {
+        background-color: var(--primary-color);
+        position: absolute;
+        right: 0px;
+        top: 72px;
+
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 100000;
+    }
+}
 
 
 
@@ -188,7 +256,11 @@
 
 /*~~~~~~~~~~~~ FOOTER ~~~~~~~~~~~~*/
     footer  {
-        padding: 16px;
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        
+        padding: 32px 32px 96px 32px;
         background-color: var(--primary-color);
 
         height: var(--nav_height);
@@ -211,23 +283,6 @@
 /*~~~~~~~~~~~~ GERALISTAS ~~~~~~~~~~~~*/
     input:invalid {
         background: whitesmoke;
-    }
-    #content {
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-
-        padding: 16px 64px;
-
-        
-        /*align-items: center;*/
-        justify-content: center;
-        height: fit-content;
-
-        min-height: calc(100vh - var(--nav_height) - var(--nav_height));
-        gap: 16px;
-        margin: auto;
     }
     .centralize {
         display: flex;
@@ -254,13 +309,35 @@
         opacity: 0.7;
         background-color: #f3f3f3 !important;
     }
+
+    .icon {
+        object-fit: cover;
+        fill: var(--secondary-color);
+    }
+    .icon:hover {
+        fill: var(--light-green);
+    }
 /*~~~~~~~~~~~~ GERALISTAS ~~~~~~~~~~~~*/
 
 
 
 
 
+/*~~~~~~~~~~~~ HOME-PAGE ~~~~~~~~~~~~*/
+    #page_home {
+        position: relative;
+        display: flex;
+        flex-direction: row;
 
+        width: 100%;
+        height: fit-content;
+        padding: 0;
+        justify-content: center;
+        gap: 16px;
+        max-width: 1116px;
+        margin: auto;
+    }
+/*~~~~~~~~~~~~ HOME-PAGE ~~~~~~~~~~~~*/
 
 
 
@@ -501,6 +578,9 @@
         max-width: 300px;
         height: fit-content;
 
+        /*left: none;
+        margin-left: 100%;*/
+
     }
     #write_post form {
         display: flex;
@@ -568,7 +648,7 @@
 
 
 /*~~~~~~~~~~~~ USER-PAGE ~~~~~~~~~~~~*/
-    .user_page {
+    #page_user {
         display: flex;
         /*flex-direction: column;*/
         flex-direction: row;
@@ -578,7 +658,7 @@
         max-width: 1000px;
         padding: 16px;
     }
-    .user_page #profile_card {
+    #page_user #profile_card {
         position: sticky;
         top: calc(var(--nav_height) + 8px);
 
@@ -591,14 +671,14 @@
         background-color: white;
         height: fit-content;
     }
-    .user_page #profile_card img {
+    #page_user #profile_card img {
         width: 240px;
         height: 240px;
         border-radius: 50%;
         object-fit: cover;
         margin: 16px;
     }
-    .user_page #profile_card div {
+    #page_user #profile_card div {
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -607,7 +687,7 @@
         background-color: whitesmoke;
         border-radius: 16px;
     }
-    .user_page #profile_posts{
+    #page_user #profile_posts{
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -616,7 +696,7 @@
         justify-content: start;
         align-items: flex-end;
     }
-    .user_page #profile_posts .post{
+    #page_user #profile_posts .post{
         margin: 0 !important;
     }
 /*~~~~~~~~~~~~ USER-PAGE ~~~~~~~~~~~~*/
@@ -645,27 +725,30 @@
         #topbar #logo span {
             display: none;
         }
-        .user_page {
-            flex-direction: column;
-            padding: 0 16px;
-        }
-        .user_page #profile_card {
-            position: relative;
-            top: 0;
-            width: 100%;
-            flex-direction: row;
-        }
-        .user_page #profile_card img {
-            width: 120px;
-            height: 120px;
-            margin: 0;
-        }
         #content {
             padding: 16px 5%;
         }
     }
 
    @media (max-width: 1200px) {
+
+        #page_user {
+            flex-direction: column;
+            padding: 0 16px;
+        }
+        #page_user #profile_card {
+            position: relative;
+            top: 0;
+            width: 100%;
+            flex-direction: row;
+        }
+        #page_user #profile_card img {
+            width: 120px;
+            height: 120px;
+            margin: 0;
+        }
+
+
         #write_post  {
             width: 100%;
             max-width: 800px;
@@ -684,7 +767,7 @@
             width: 100%;
             max-width: 800px;
         }
-        #content {
+        #page_home {
             flex-direction: column;
             align-items: center;
         }
