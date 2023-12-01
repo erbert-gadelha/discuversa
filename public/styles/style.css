@@ -437,16 +437,16 @@
 
 
 /*~~~~~~~~~~~~ POST-PAGE ~~~~~~~~~~~~*/
-    #post_main {
+    #page_post {
         display: flex;
         flex-direction: column;
         background-color: var(--light-grey);
-        width: calc(100% - 32px);
+        width: 100%;
         height: fit-content;
         margin: 32px auto;
         overflow: hidden;
     }
-    #post_main .post_header {
+    #page_post .post_header {
         display: flex;
         flex-direction: row;
         background-color: white;
@@ -454,25 +454,25 @@
         position: relative;
         border-bottom: 1px solid gray;
     }
-    #post_main .post_header .profile{
+    #page_post .post_header .profile{
         padding: 16px;
         display: flex;
         flex-direction: column;
         background-color: whitesmoke;
     }
-    #post_main .post_header .profile img{
+    #page_post .post_header .profile img{
         height: 70px;
         width: 70px;
     }
-    #post_main .post_header .title{
+    #page_post .post_header .title{
         margin: auto;
     }
-    #post_main .post_header .date{
+    #page_post .post_header .date{
         position: absolute;
         right: 16px;
         bottom: 16px;
     }
-    #post_main .post_content {
+    #page_post .post_content {
         width: 100%;
         padding: 16px;
         display: flex;
@@ -480,16 +480,16 @@
         flex-direction: column;
         align-items: center;
     }
-    #post_main .post_content img {
+    #page_post .post_content img {
         width: auto;
         height: auto;
 
         max-height: 360px;
     }
-    #post_main .post_content p {
+    #page_post .post_content p {
         width: 100%;
     }
-    #post_main .post_options {
+    #page_post .post_options {
         position: absolute;
         right: 0;
         top: 0;
@@ -503,15 +503,15 @@
         background-color: whitesmoke;
         border-radius: 0 0 0 16px;
     }
-    #post_main .post_options button{
+    #page_post .post_options button{
         cursor: pointer;
         background-color: transparent;
         color: var(--primary-color);
     }
-    #post_main .post_options button:nth-of-type(1):hover{
+    #page_post .post_options button:nth-of-type(1):hover{
         color: orange;
     }
-    #post_main .post_options button:nth-of-type(2):hover{
+    #page_post .post_options button:nth-of-type(2):hover{
         color: red;
     }
 /*~~~~~~~~~~~~ POST-PAGE ~~~~~~~~~~~~*/
@@ -658,9 +658,7 @@
         flex-direction: row;
         gap: 16px;
         width: 100%;
-        margin: 32px auto;
         max-width: 1000px;
-        padding: 16px;
     }
     #page_user #profile_card {
         position: sticky;
@@ -738,7 +736,6 @@
 
         #page_user {
             flex-direction: column;
-            padding: 0 16px;
         }
         #page_user #profile_card {
             position: relative;
