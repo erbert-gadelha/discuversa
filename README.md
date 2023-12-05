@@ -1,6 +1,6 @@
-# AniForum
+# Discuversa
 
-AniForum é um fórum desenvolvido para o interpretador NodeJS, utilizando várias bibliotecas para funcionalidades essenciais.
+Discuversa é um fórum desenvolvido para o interpretador NodeJS, utilizando várias bibliotecas para funcionalidades essenciais.
 
 ## Funcionalidades
 
@@ -22,7 +22,7 @@ AniForum é um fórum desenvolvido para o interpretador NodeJS, utilizando vári
 ## Como Rodar Localmente
 
 1. Certifique-se de ter o Node.js instalado na sua máquina.
-2. Clone este repositório: `git clone https://github.com/erbert-gadelha/aniforum-backend`
+2. Clone este repositório: `git clone https://github.com/erbert-gadelha/discuversa`
 3. Instale as dependências: `npm install`
 4. Configure as variáveis de ambiente para a conexão com o banco de dados Postgres e outras configurações necessárias.
 5. Execute o aplicativo: `npm start`
