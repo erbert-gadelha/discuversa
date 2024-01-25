@@ -1,5 +1,6 @@
 # Discuversa
 
+![wasd](https://github.com/erbert-gadelha/discuversa/assets/48739173/14c3964e-1a26-45c4-83b9-8eb5828c71b7)
 Discuversa é um fórum desenvolvido para o interpretador NodeJS, utilizando várias bibliotecas para funcionalidades essenciais.
 
 ## Funcionalidades
